@@ -144,6 +144,7 @@ header,
 
 .board_block {
    min-width: 272px;
+   width: 100%;
    height: fit-content;
    max-height: 100%;
    background-color: var(--white);
