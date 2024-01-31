@@ -1,18 +1,18 @@
 const toDo = document.getElementById("to-do");
 const inProgress = document.getElementById("in-progress");
 const done = document.getElementById("done");
-const boardBlock = document.querySelectorAll(".board_block");
 
 window.addEventListener("click", (e) => {
   if (e.target.dataset.role === "add-task") {
     const boardBlock = e.target.closest(".board_block");
-    const form = `<form class="board_card" action="#"><textarea cols="28" rows="10" placeholder="Enter a title for this card..." class="textarea form_task"
+    const form = ` <form class="board_card" action="#"><textarea cols="28" rows="10" placeholder="Enter a title for this card..." class="textarea form_task"
       style="height: 56px;" ></textarea>
     <button type="submit" class="btn btn-primary form_add-btn">Add card</button>
     <span class="remove-form">x</span></form>`;
 
     const boardAddBtn = boardBlock.querySelector(".board_block-add-btn");
     boardAddBtn.classList.add("remove-add-btn");
+
     boardBlock.insertAdjacentHTML("beforeend", form);
 
     const boardForm = boardBlock.querySelector(".board_card");
@@ -22,12 +22,11 @@ window.addEventListener("click", (e) => {
     boardForm.addEventListener("submit", (e) => {
       e.preventDefault();
       if (formTask.value) {
-        const task = `
-        <div class="draggables-task" draggable="true">
-          <textarea class="textarea board-task">${
-            formTask.value.charAt(0).toUpperCase() + formTask.value.slice(1)
-          }</textarea>
-          <i class="fa-solid fa-pen edit-btn"></i>
+        const task = `<div class="position-relative board-task">
+        <textarea class="textarea">${
+          formTask.value.charAt(0).toUpperCase() + formTask.value.slice(1)
+        }</textarea>
+      <i class="fa-solid fa-pen edit-btn"></i>
         </div>`;
         boardList.insertAdjacentHTML("beforeend", task);
         boardForm.remove();
@@ -35,18 +34,20 @@ window.addEventListener("click", (e) => {
       }
 
       const boardTask = boardList.querySelector(".board-task");
+
       boardTask.addEventListener("input", (e) => {
         boardTask.innerText = e.target.value;
       });
 
-      const draggablesTasks = document.querySelectorAll(".draggables-task");
-      draggablesTasks.forEach((draggable) => {
-        draggable.addEventListener("dragstart", () => {
-          draggable.classList.add("dragging");
-        });
-        draggable.addEventListener("dragend", () => {
-          draggable.classList.remove("dragging");
-        });
+      let initialTaskValue = boardTask.textContent;
+
+      boardTask.addEventListener("focusout", (e) => {
+        /* this code is not working */
+        if (!boardTask.textContent.trim()) {
+          console.log(true);
+          console.log(initialTaskValue);
+          boardTask.innerText = initialTaskValue;
+        }
       });
     });
 
@@ -58,10 +59,14 @@ window.addEventListener("click", (e) => {
   }
 });
 
-boardBlock.forEach((block) => {
-  block.addEventListener("dragover", (e) => {
-    e.preventDefault();
-    const draggableTask = document.querySelector(".dragging");
-    block.appendChild(draggableTask);
-  });
-});
+// const task = document.createElement("div");
+// task.classList.add("drag-task");
+// task.draggable = true;
+// task.innerHTML = `
+//   <textarea class="textarea board-task">${
+//     formTask.value.charAt(0).toUpperCase() + formTask.value.slice(1)
+//   }</textarea>
+//   <i class="fa-solid fa-pen edit-btn"></i>
+// `;
+// boardList.appendChild(task);
+// task.addEventListener("dragstart", dragstart);

@@ -138,8 +138,9 @@ header,
 .board_content {
    width: 75%;
    display: flex;
-   gap:30px;
+   gap: 30px;
    padding: 10px 20px;
+   overflow-x: auto;
 }
 
 .board_block {
@@ -151,16 +152,22 @@ header,
    border-radius: 10px;
    padding: 15px;
    font-size: 0.9rem;
+   overflow-y: auto;
+   overflow-x:hidden;
 }
 
 .board_block h4 {
    font-size: 0.9rem
 }
-.board_list li input,
-.board_card textarea {
-   width: 100%;
-   max-height: fit-content;
+/* 
+.board_list {
    height: 100%;
+   overflow-y: auto;
+   overflow-x:hidden;
+} */
+
+.textarea {
+   width: 100%;
    border: 0.5px solid var(--grey);
    border-radius: 5px;
    padding: 6px;
@@ -176,6 +183,7 @@ header,
    border-radius: 5px;
    width: 80%;
    text-align: left;
+
 }
 
 .board_block-add-btn:hover,
@@ -208,9 +216,23 @@ header,
 .edit-btn {
    position: absolute;
    right: 7px;
-   top: 17px;
+   top: 14px;
    border: none;
    background-color: transparent;
    font-size: 0.8rem;
    cursor:none;
+}
+
+.board-task,
+.draggables-task {
+   cursor: pointer;  
+   outline: none;
+}
+
+.draggables-task {
+   position: relative;
+}
+
+.draggables-task.dragging {
+   opacity: .5;
 }
