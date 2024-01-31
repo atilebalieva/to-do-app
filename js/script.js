@@ -1,45 +1,54 @@
 const toDo = document.getElementById("to-do");
 const inProgress = document.getElementById("in-progress");
 const done = document.getElementById("done");
-const boardBlock = document.querySelectorAll(".board_block");
+const listOfTasks = document.querySelectorAll(".list_tasks");
 
 window.addEventListener("click", (e) => {
   if (e.target.dataset.role === "add-task") {
-    const boardBlock = e.target.closest(".board_block");
-    const form = `<form class="board_card" action="#"><textarea cols="28" rows="10" placeholder="Enter a title for this card..." class="textarea form_task"
+    function doNotAddTask() {
+      addTaskCard.remove();
+      taskColumnAddBtn.classList.remove("remove-add-btn");
+    }
+
+    const taskColumn = e.target.closest(".task_column");
+    const listOfTasks = taskColumn.querySelector(".list_tasks");
+    const addTaskCardHtml = `<form class="add-task_card" action="#"><textarea class="textarea task-value"cols="28" rows="10" placeholder="Enter a title for this card..."
       style="height: 56px;" ></textarea>
-    <button type="submit" class="btn btn-primary form_add-btn">Add card</button>
-    <span class="remove-form">x</span></form>`;
+    <button type="submit" class="btn btn-primary add-task_card-btn">Add card</button>
+    <span class="remove-task_card">x</span></form>`;
 
-    const boardAddBtn = boardBlock.querySelector(".board_block-add-btn");
-    boardAddBtn.classList.add("remove-add-btn");
-    boardBlock.insertAdjacentHTML("beforeend", form);
+    taskColumn.insertAdjacentHTML("beforeend", addTaskCardHtml);
+    const taskColumnAddBtn = taskColumn.querySelector(".task_column-add-btn");
+    taskColumnAddBtn.classList.add("remove-add-btn");
 
-    const boardForm = boardBlock.querySelector(".board_card");
-    const formTask = boardBlock.querySelector(".form_task");
-    const boardList = boardBlock.querySelector(".board_list");
+    const addTaskCard = taskColumn.querySelector(".add-task_card");
+    const taskValue = taskColumn.querySelector(".task-value");
 
-    boardForm.addEventListener("submit", (e) => {
+    const removeTaskCard = taskColumn.querySelector(".remove-task_card");
+    removeTaskCard.addEventListener("click", doNotAddTask);
+
+    addTaskCard.addEventListener("submit", (e) => {
       e.preventDefault();
-      if (formTask.value) {
-        const task = `
-        <div class="draggables-task" draggable="true">
-          <textarea class="textarea board-task">${
-            formTask.value.charAt(0).toUpperCase() + formTask.value.slice(1)
+      if (taskValue.value) {
+        const taskName = `
+        <div class="draggable-task" draggable="true">
+          <textarea class="textarea task">${
+            taskValue.value.charAt(0).toUpperCase() + taskValue.value.slice(1)
           }</textarea>
           <i class="fa-solid fa-pen edit-btn"></i>
         </div>`;
-        boardList.insertAdjacentHTML("beforeend", task);
-        boardForm.remove();
-        boardAddBtn.classList.remove("remove-add-btn");
+
+        listOfTasks.insertAdjacentHTML("beforeend", taskName);
+        listOfTasks.classList.add("height");
+        doNotAddTask();
       }
 
-      const boardTask = boardList.querySelector(".board-task");
-      boardTask.addEventListener("input", (e) => {
-        boardTask.innerText = e.target.value;
+      const changeTask = listOfTasks.querySelector(".task");
+      changeTask.addEventListener("input", (e) => {
+        changeTask.innerText = e.target.value;
       });
 
-      const draggablesTasks = document.querySelectorAll(".draggables-task");
+      const draggablesTasks = document.querySelectorAll(".draggable-task");
       draggablesTasks.forEach((draggable) => {
         draggable.addEventListener("dragstart", () => {
           draggable.classList.add("dragging");
@@ -49,19 +58,13 @@ window.addEventListener("click", (e) => {
         });
       });
     });
-
-    const removeformBtn = boardBlock.querySelector(".remove-form");
-    removeformBtn.addEventListener("click", () => {
-      boardForm.remove();
-      boardAddBtn.classList.remove("remove-add-btn");
-    });
   }
 });
 
-boardBlock.forEach((block) => {
-  block.addEventListener("dragover", (e) => {
+listOfTasks.forEach((column) => {
+  column.addEventListener("dragover", (e) => {
     e.preventDefault();
     const draggableTask = document.querySelector(".dragging");
-    block.appendChild(draggableTask);
+    column.appendChild(draggableTask);
   });
 });

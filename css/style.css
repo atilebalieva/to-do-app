@@ -136,14 +136,15 @@ header,
 }
 
 .board_content {
-   width: 75%;
+   width: 100%;
+/*    width: 75%; */
    display: flex;
    gap: 30px;
    padding: 10px 20px;
    overflow-x: auto;
 }
 
-.board_block {
+.task_column {
    min-width: 272px;
    width: 100%;
    height: fit-content;
@@ -156,15 +157,9 @@ header,
    overflow-x:hidden;
 }
 
-.board_block h4 {
+.task_column h4 {
    font-size: 0.9rem
 }
-/* 
-.board_list {
-   height: 100%;
-   overflow-y: auto;
-   overflow-x:hidden;
-} */
 
 .textarea {
    width: 100%;
@@ -175,7 +170,7 @@ header,
    box-shadow: 0px 0px 4px rgb(207, 206, 206);
 }
 
-.board_block-add-btn {
+.task_column-add-btn {
    background-color: transparent;
    outline: none;
    border: none;
@@ -186,23 +181,26 @@ header,
 
 }
 
-.board_block-add-btn:hover,
-.board_card span:hover{
+.task_column-add-btn:hover{
    background-color: #aaa2a24d;
 }
 
-.board_block-add-btn span {
+.task_column-add-btn span {
    margin-right: 10px;
    font-size: 1.1rem;
 }
 
-.form_add-btn {
+.list_tasks {
+   min-height: 20px;
+}
+
+.add-task_card-btn {
    padding: 5px 10px !important;
    font-size: 0.9rem !important;
    font-weight: bold;
 }
 
-.board_card span {
+.task_column span {
    padding: 6px 12px 9px;
    border-radius: 5px;
    font-size: 1rem;
@@ -213,6 +211,10 @@ header,
    display: none;
 }
 
+.draggable-task {
+   position: relative;
+}
+
 .edit-btn {
    position: absolute;
    right: 7px;
@@ -220,19 +222,15 @@ header,
    border: none;
    background-color: transparent;
    font-size: 0.8rem;
-   cursor:none;
+   cursor:pointer;
 }
 
-.board-task,
-.draggables-task {
+.task,
+.draggable-task {
    cursor: pointer;  
    outline: none;
 }
 
-.draggables-task {
-   position: relative;
-}
-
-.draggables-task.dragging {
+.draggable-task.dragging {
    opacity: .5;
 }
