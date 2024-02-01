@@ -178,7 +178,6 @@ header,
    border-radius: 5px;
    width: 80%;
    text-align: left;
-
 }
 
 .task_column-add-btn:hover{
@@ -192,6 +191,10 @@ header,
 
 .list_tasks {
    min-height: 20px;
+}
+
+.list_tasks .height {
+   min-height: 0;
 }
 
 .add-task_card-btn {
