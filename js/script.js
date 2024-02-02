@@ -3,14 +3,65 @@ const inProgress = document.getElementById("in-progress");
 const done = document.getElementById("done");
 const listOfTasks = document.querySelectorAll(".list_tasks");
 
+/* Sidebar toggle */
+function sidebarToggle(display, width) {
+  document.querySelector(".sidebar_close-form").style.display = display;
+  document.getElementById("sidebar_open").style.display = display;
+  document.getElementById("board_content").style.width = width;
+}
+
+document.getElementById("sidebar_close").addEventListener("click", () => {
+  sidebarToggle("block", "100%");
+  document.querySelector(".sidebar").classList.add("sidebar_none");
+});
+
+document.getElementById("sidebar_open").addEventListener("click", () => {
+  sidebarToggle("none", "75%");
+  document.querySelector(".sidebar").classList.remove("sidebar_none");
+});
+/* Sidebar toggle */
+
 function setTaskData(taskColumn, storageKey) {
   let tasks = [];
   let listofTask = taskColumn.querySelectorAll(".draggable-task");
   listofTask.forEach((item) => {
-    tasks.push(item.querySelector("textarea").value);
+    tasks.push(item.querySelector("textarea").textContent);
   });
 
   localStorage.setItem(storageKey, JSON.stringify(tasks));
+}
+
+function addEventListenersToTask(taskColumn, storageKey) {
+  function removeTaskIfEmpty() {
+    const draggableTasks = taskColumn.querySelectorAll(
+      ".list_tasks .draggable-task"
+    );
+    draggableTasks.forEach((draggableTask) => {
+      const textarea = draggableTask.querySelector(".textarea.task");
+      if (textarea && textarea.value.trim() === "") {
+        draggableTask.remove();
+        setTaskData(taskColumn, storageKey);
+      }
+    });
+  }
+  const changeTask = taskColumn.querySelectorAll(".list_tasks .task");
+  changeTask.forEach((item) => {
+    item.addEventListener("input", (e) => {
+      item.innerText = e.target.value;
+      setTaskData(taskColumn, storageKey);
+      removeTaskIfEmpty();
+    });
+  });
+
+  const draggablesTasks = document.querySelectorAll(".draggable-task");
+  draggablesTasks.forEach((draggable) => {
+    draggable.addEventListener("dragstart", () => {
+      draggable.classList.add("dragging");
+    });
+    draggable.addEventListener("dragend", () => {
+      draggable.classList.remove("dragging");
+    });
+  });
 }
 
 function getTaskData(taskColumn, storageKey) {
@@ -20,31 +71,12 @@ function getTaskData(taskColumn, storageKey) {
       const taskName = `
       <div class="draggable-task" draggable="true">
         <textarea class="textarea task">${item}</textarea>
-        <i class="fa-solid fa-pen edit-btn"></i>
       </div>`;
 
       taskColumn
         .querySelector(".list_tasks")
         .insertAdjacentHTML("beforeend", taskName);
-
-      const changeTask = taskColumn
-        .querySelector(".list_tasks")
-        .querySelector(".task");
-
-      changeTask.addEventListener("input", (e) => {
-        changeTask.innerText = e.target.value;
-        setTaskData(taskColumn, storageKey);
-      });
-
-      const draggablesTasks = document.querySelectorAll(".draggable-task");
-      draggablesTasks.forEach((draggable) => {
-        draggable.addEventListener("dragstart", () => {
-          draggable.classList.add("dragging");
-        });
-        draggable.addEventListener("dragend", () => {
-          draggable.classList.remove("dragging");
-        });
-      });
+      addEventListenersToTask(taskColumn, storageKey);
     });
   }
 }
@@ -82,7 +114,6 @@ window.addEventListener("click", (e) => {
           <textarea class="textarea task">${
             taskValue.value.charAt(0).toUpperCase() + taskValue.value.slice(1)
           }</textarea>
-          <i class="fa-solid fa-pen edit-btn"></i>
         </div>`;
 
         listOfTasks.insertAdjacentHTML("beforeend", taskName);
@@ -94,23 +125,7 @@ window.addEventListener("click", (e) => {
         doNotAddTask();
       }
 
-      const changeTask = listOfTasks.querySelector(".task");
-      changeTask.addEventListener("input", (e) => {
-        changeTask.innerText = e.target.value;
-        setTaskData(toDo, storageKey);
-        setTaskData(inProgress, storageKey);
-        setTaskData(done, storageKey);
-      });
-
-      const draggablesTasks = document.querySelectorAll(".draggable-task");
-      draggablesTasks.forEach((draggable) => {
-        draggable.addEventListener("dragstart", () => {
-          draggable.classList.add("dragging");
-        });
-        draggable.addEventListener("dragend", () => {
-          draggable.classList.remove("dragging");
-        });
-      });
+      addEventListenersToTask(taskColumn, storageKey);
     });
   }
 });
@@ -118,11 +133,11 @@ window.addEventListener("click", (e) => {
 listOfTasks.forEach((column) => {
   column.addEventListener("dragover", (e) => {
     e.preventDefault();
+    const draggableTask = document.querySelector(".dragging");
+    column.appendChild(draggableTask);
     setTaskData(toDo, "to-do");
     setTaskData(inProgress, "in-progress");
     setTaskData(done, "done");
-    const draggableTask = document.querySelector(".dragging");
-    column.appendChild(draggableTask);
   });
 });
 

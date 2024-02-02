@@ -17,8 +17,11 @@ html {
 }
 
 :root {
-   --grey: rgb(201, 198, 198);
+   --grey: #4f4f4f;
    --white: white;
+   --dark: #221e24;
+   --pinkBack: rgba(172,75,121,255);
+   --hoverBack: rgba(255, 255, 255, 0.3);
 }
 
 body {
@@ -32,11 +35,12 @@ header {
    justify-content: center;
    border-bottom: 0.5px solid var(--grey);
    height: 8%;
+   min-height: 50px;
 }
 
 header,
 .sidebar {
-   background: rgba(172,75,121,255);
+   background:var(--dark);
    color: var(--white);
 }
 
@@ -56,28 +60,63 @@ header,
    color: var(--white);
    padding: 5px;
    border-radius: 5px;
+   margin: 0 0 0 5px;
 }
 
 .navbar-logo p:hover {
-   background-color: rgba(255,255,255,0.3);
+   background-color: var(--hoverBack);
    padding: 5px;
    border-radius: 5px;
 }
 
 .nav_search {
    height: 30px;
+   display: flex;
+   position: relative;
+   margin-left: 10px;
 }
 
 .nav_search input {
-   padding: 10px 10px;
-   border: 0.5px solid var(--white);
+   padding: 15px 10px 15px 25px;
+   border: 0.5px solid var(--grey);
    border-radius: 5px;
    outline: none;
-   background-color: #c5baba4d;
+   background-color: #7070704d;
+   color: var(--white);
+   width: 100%;
 }
 
 .nav_search input::placeholder {
-   color: white;
+   color: var(--white);
+}
+
+.nav_search .fa-magnifying-glass {
+   position: absolute;
+   top: 27%;
+   left: 3%;
+   font-size: 15px;
+}
+
+#main-content {
+   height: 92%;
+   display: flex;
+   background: rgba(144,63,101,255);
+}
+
+.sidebar {
+   min-width: 272px;
+   width: 20%;
+   border-right: 0.5px solid var(--grey);
+   position: relative;
+   left: 0px;
+   height: 100%;
+   z-index: 1;
+}
+
+.sidebar_none {
+   left: -2000px;
+   position: absolute;
+   transition: all 0.5s ease-in;
 }
 
 .sidebar_nav {
@@ -97,10 +136,38 @@ header,
 }
 
 .sidebar_arrow {
+   padding: 9px 10px;
    color: var(--white);
-   font-size: 0.7rem;
+   font-size: 0.9rem;
    font-weight: bold;
    cursor: pointer;
+}
+
+.sidebar_close-form {
+   border-right: 0.3px solid var(--white);
+   min-width: 15px;
+   background-color: var(--dark);
+   position: relative;
+}
+
+.fa-arrow-right {
+   border-radius: 50%;
+   border: 0.5px solid var(--white);
+   background-color: rgb(65, 5, 38);
+   position: absolute;
+   top: 11%;
+   font-size: 12px;
+   width: 30px;
+   height: 30px;
+}
+
+.sidebar_arrow:hover,
+.sidebar_boards span:hover {
+   background-color: var(--hoverBack);
+}
+
+.fa-arrow-right:hover {
+   background-color: #1c11b9;
 }
 
 .sidebar_boards h4 {
@@ -109,6 +176,8 @@ header,
 }
 
 .sidebar_boards span {
+   display: block;
+   padding: 0px 10px;
    font-weight: bold;
    cursor: pointer;
    font-size: 1.3rem;
@@ -123,24 +192,11 @@ header,
    background-color: #aaa2a24d;
 }
 
-.main-content {
-   height: 92%;
-   display: flex;
-   background: rgba(205,90,145,255);
-}
-
-.sidebar {
-   min-width: 272px;
-   width: 20%;
-   border-right: 0.5px solid var(--grey);
-}
-
-.board_content {
-   width: 100%;
-/*    width: 75%; */
+#board_content {
+   width: 75%;
    display: flex;
    gap: 30px;
-   padding: 10px 20px;
+   padding: 10px 20px 10px 50px;
    overflow-x: auto;
 }
 
