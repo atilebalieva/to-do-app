@@ -69,7 +69,7 @@ function getTaskData(taskColumn, storageKey) {
     data.forEach((item) => {
       const taskName = `
       <div class="draggable-task" draggable="true">
-        <textarea class="textarea task">${item}</textarea>
+        <textarea class="textarea task" style={height: "fit-content"}>${item}</textarea>
       </div>`;
 
       taskColumn
@@ -110,7 +110,7 @@ window.addEventListener("click", (e) => {
       if (taskValue.value) {
         const taskName = `
         <div class="draggable-task" draggable="true">
-          <textarea class="textarea task">${
+          <textarea class="textarea task" style={height: "fit-content"}>${
             taskValue.value.charAt(0).toUpperCase() + taskValue.value.slice(1)
           }</textarea>
         </div>`;

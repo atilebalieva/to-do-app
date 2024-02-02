@@ -1,0 +1,129 @@
+<!DOCTYPE html>
+<!-- saved from url=(0033)http://127.0.0.1:5500/index.html# -->
+<html lang="en"><head><meta http-equiv="Content-Type" content="text/html; charset=UTF-8">
+   
+   <meta name="viewport" content="width=device-width, initial-scale=1.0">
+   <title>To-do-board</title>
+   <link rel="stylesheet" href="./To-do-board_files/style.css">
+   <link rel="stylesheet" href="./To-do-board_files/normalize.css">
+   <link href="./To-do-board_files/bootstrap.min.css" rel="stylesheet" integrity="sha384-T3c6CoIi6uLrA9TneNEoa7RxnatzjcDSCmG1MXxSR1GAsXEV/Dwwykc2MPK8M2HN" crossorigin="anonymous">
+   <link rel="stylesheet" href="./To-do-board_files/all.min.css">
+   <link href="./To-do-board_files/css2" rel="stylesheet">
+</head>
+
+<body>
+   <header class="py-2 px-3">
+      <nav>
+         <ul class="d-flex justify-content-between align-items-center">
+            <li>
+               <ul class="d-flex align-items-center gap-3">
+                  <li class="align-self-center">
+                     <a class="navbar-logo" href="http://127.0.0.1:5500/index.html#">
+                        <img src="./To-do-board_files/todo-icon-2048x2048-m7wp6prw.png" alt="">
+                        <p>
+                           To<span>do</span>
+                        </p>
+                     </a>
+                  </li>
+                  <li>
+                     <a class="nav-link active" aria-current="page" href="http://127.0.0.1:5500/index.html#">Template</a>
+                  </li>
+               </ul>
+            </li>
+            <li>
+               <form class="nav_search" role="search">
+                  <i class="fa-solid fa-magnifying-glass"></i>
+                  <input class="" type="search" placeholder="Search" aria-label="Search">
+               </form>
+            </li>
+         </ul>
+      </nav>
+   </header>
+   <main id="main-content">
+      <aside class="sidebar">
+         <div class="sidebar_nav py-2 px-3">
+            <b><span>T</span><span>Tasks Workspace</span></b>
+            <i class="fa-solid fa-arrow-left sidebar_arrow" id="sidebar_close"></i>
+         </div>
+         <div class="sidebar_boards">
+            <div class="d-flex justify-content-between align-items-center py-2 px-3">
+               <h4>Your boards:</h4>
+               <span>+</span>
+            </div>
+            <div>
+               <p class="py-1 px-3">My tasks board</p>
+            </div>
+         </div>
+      </aside>
+      <div class="sidebar_close-form" style="display:none"></div>
+      <i class="fa-solid fa-arrow-right sidebar_arrow" id="sidebar_open" style="display:none"></i>
+      <div id="board_content">
+         <div class="task_column" id="to-do">
+            <h4>To do</h4>
+            <div class="list_tasks">
+            </div>
+            <button type="button" class="task_column-add-btn" data-role="add-task"><span>+</span>Add card</button>
+         </div>
+         <div class="task_column" id="in-progress">
+            <h4>Doing</h4>
+            <div class="list_tasks">
+            
+      <div class="draggable-task" draggable="true">
+        <textarea class="textarea task" style="{height:" "fit-content"}="">This refactoring continues to separate functionalities into smaller functions, improving readability, and maintaining a cleaner code structure. Let me know if you have further questions or if there's anything specific you'd like to address!</textarea>
+      </div></div>
+            <button type="button" class="task_column-add-btn" data-role="add-task"><span>+</span>Add card</button>
+         </div>
+         <div class="task_column" id="done">
+            <h4>Done</h4>
+            <div class="list_tasks">
+            </div>
+            <button type="button" class="task_column-add-btn" data-role="add-task"><span>+</span>Add card</button>
+         </div>
+      </div>
+   </main>
+
+   <script src="./To-do-board_files/bootstrap.bundle.min.js" integrity="sha384-C6RzsynM9kWDrMNeT87bh95OGNyZPhcTNXj1NW7RuBCsyN/o0jlpcV8Qyq46cDfL" crossorigin="anonymous"></script>
+   <script src="./To-do-board_files/popper.min.js" integrity="sha384-I7E8VVD/ismYTF4hNIPjVp/Zjvgyol6VFvRkX/vR+Vc4jQkC+hVqc2pM8ODewa9r" crossorigin="anonymous"></script>
+   <script src="./To-do-board_files/bootstrap.min.js" integrity="sha384-BBtl+eGJRgqQAUMxJ7pMwbEyER4l1g+O15P+16Ep7Q9Q+zqX6gSbd85u4mG4QzX+" crossorigin="anonymous"></script>
+   <script src="./To-do-board_files/script.js"></script>
+<!-- Code injected by live-server -->
+<script>
+	// <![CDATA[  <-- For SVG support
+	if ('WebSocket' in window) {
+		(function () {
+			function refreshCSS() {
+				var sheets = [].slice.call(document.getElementsByTagName("link"));
+				var head = document.getElementsByTagName("head")[0];
+				for (var i = 0; i < sheets.length; ++i) {
+					var elem = sheets[i];
+					var parent = elem.parentElement || head;
+					parent.removeChild(elem);
+					var rel = elem.rel;
+					if (elem.href && typeof rel != "string" || rel.length == 0 || rel.toLowerCase() == "stylesheet") {
+						var url = elem.href.replace(/(&|\?)_cacheOverride=\d+/, '');
+						elem.href = url + (url.indexOf('?') >= 0 ? '&' : '?') + '_cacheOverride=' + (new Date().valueOf());
+					}
+					parent.appendChild(elem);
+				}
+			}
+			var protocol = window.location.protocol === 'http:' ? 'ws://' : 'wss://';
+			var address = protocol + window.location.host + window.location.pathname + '/ws';
+			var socket = new WebSocket(address);
+			socket.onmessage = function (msg) {
+				if (msg.data == 'reload') window.location.reload();
+				else if (msg.data == 'refreshcss') refreshCSS();
+			};
+			if (sessionStorage && !sessionStorage.getItem('IsThisFirstTime_Log_From_LiveServer')) {
+				console.log('Live reload enabled.');
+				sessionStorage.setItem('IsThisFirstTime_Log_From_LiveServer', true);
+			}
+		})();
+	}
+	else {
+		console.error('Upgrade your browser. This Browser is NOT supported WebSocket for Live-Reloading.');
+	}
+	// ]]>
+</script>
+
+
+</body></html>

@@ -22,33 +22,34 @@ document.getElementById("sidebar_open").addEventListener("click", () => {
 /* Sidebar toggle */
 
 function setTaskData(taskColumn, storageKey) {
-  const tasks = Array.from(taskColumn.querySelectorAll(".draggable-task")).map(
-    (item) => item.querySelector("textarea").textContent
-  );
+  let tasks = [];
+  let listofTask = taskColumn.querySelectorAll(".draggable-task");
+  listofTask.forEach((item) => {
+    tasks.push(item.querySelector("textarea").textContent);
+  });
 
   localStorage.setItem(storageKey, JSON.stringify(tasks));
 }
 
-function removeEmptyTasks(taskColumn, storageKey) {
-  const draggableTasks = taskColumn.querySelectorAll(
-    ".list_tasks .draggable-task"
-  );
-  draggableTasks.forEach((draggableTask) => {
-    const textarea = draggableTask.querySelector(".textarea.task");
-    if (textarea && textarea.value.trim() === "") {
-      draggableTask.remove();
-      setTaskData(taskColumn, storageKey);
-    }
-  });
-}
-
 function addEventListenersToTask(taskColumn, storageKey) {
+  function removeTaskIfEmpty() {
+    const draggableTasks = taskColumn.querySelectorAll(
+      ".list_tasks .draggable-task"
+    );
+    draggableTasks.forEach((draggableTask) => {
+      const textarea = draggableTask.querySelector(".textarea.task");
+      if (textarea && textarea.value.trim() === "") {
+        draggableTask.remove();
+        setTaskData(taskColumn, storageKey);
+      }
+    });
+  }
   const changeTask = taskColumn.querySelectorAll(".list_tasks .task");
   changeTask.forEach((item) => {
     item.addEventListener("input", (e) => {
       item.innerText = e.target.value;
       setTaskData(taskColumn, storageKey);
-      removeEmptyTasks(taskColumn, storageKey);
+      removeTaskIfEmpty();
     });
   });
 
@@ -123,6 +124,7 @@ window.addEventListener("click", (e) => {
 
         doNotAddTask();
       }
+
       addEventListenersToTask(taskColumn, storageKey);
     });
   }

@@ -285,6 +285,11 @@ header,
    cursor:pointer;
 }
 
+.task {
+   overflow-y: hidden; 
+   height: auto;
+}
+
 .task,
 .draggable-task {
    cursor: pointer;  
