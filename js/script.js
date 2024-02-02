@@ -59,6 +59,7 @@ function addEventListenersToTask(taskColumn, storageKey) {
     });
     draggable.addEventListener("dragend", () => {
       draggable.classList.remove("dragging");
+      setTaskData(taskColumn, storageKey);
     });
   });
 }
@@ -69,7 +70,7 @@ function getTaskData(taskColumn, storageKey) {
     data.forEach((item) => {
       const taskName = `
       <div class="draggable-task" draggable="true">
-        <textarea class="textarea task">${item}</textarea>
+        <textarea name="text" class="textarea task">${item}</textarea>
       </div>`;
 
       taskColumn
@@ -90,7 +91,7 @@ window.addEventListener("click", (e) => {
     const taskColumn = e.target.closest(".task_column");
     const listOfTasks = taskColumn.querySelector(".list_tasks");
     const storageKey = taskColumn.id;
-    const addTaskCardHtml = `<form class="add-task_card" action="#"><textarea class="textarea task-value"cols="28" rows="10" placeholder="Enter a title for this card..."
+    const addTaskCardHtml = `<form class="add-task_card" action="#"><textarea name="text" class="textarea task-value"cols="28" rows="10" placeholder="Enter a title for this card..."
       style="height: 56px;" ></textarea>
     <button type="submit" class="btn btn-primary add-task_card-btn">Add card</button>
     <span class="remove-task_card">x</span></form>`;
@@ -100,18 +101,17 @@ window.addEventListener("click", (e) => {
     taskColumnAddBtn.classList.add("remove-add-btn");
 
     const addTaskCard = taskColumn.querySelector(".add-task_card");
-    const taskValue = taskColumn.querySelector(".task-value");
-
     const removeTaskCard = taskColumn.querySelector(".remove-task_card");
     removeTaskCard.addEventListener("click", doNotAddTask);
 
     addTaskCard.addEventListener("submit", (e) => {
+      const taskValue = taskColumn.querySelector(".task-value").value.trim();
       e.preventDefault();
-      if (taskValue.value) {
+      if (taskValue) {
         const taskName = `
         <div class="draggable-task" draggable="true">
-          <textarea class="textarea task">${
-            taskValue.value.charAt(0).toUpperCase() + taskValue.value.slice(1)
+          <textarea name="text" class="textarea task">${
+            taskValue.charAt(0).toUpperCase() + taskValue.slice(1)
           }</textarea>
         </div>`;
 

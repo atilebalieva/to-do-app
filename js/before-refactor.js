@@ -60,6 +60,7 @@ function addEventListenersToTask(taskColumn, storageKey) {
     });
     draggable.addEventListener("dragend", () => {
       draggable.classList.remove("dragging");
+      setTaskData(taskColumn, storageKey);
     });
   });
 }
