@@ -43,13 +43,15 @@ function removeEmptyTasks(taskColumn, storageKey) {
 }
 
 function addEventListenersToTask(taskColumn, storageKey) {
-  const changeTask = taskColumn.querySelectorAll(".list_tasks .task");
-  changeTask.forEach((item) => {
-    item.addEventListener("input", (e) => {
-      item.innerText = e.target.value;
+  const listTasks = taskColumn.querySelector(".list_tasks");
+
+  listTasks.addEventListener("input", (e) => {
+    const taskElement = e.target.closest(".task");
+    if (taskElement) {
+      taskElement.innerText = e.target.value;
       setTaskData(taskColumn, storageKey);
       removeEmptyTasks(taskColumn, storageKey);
-    });
+    }
   });
 
   const draggablesTasks = document.querySelectorAll(".draggable-task");
@@ -76,8 +78,9 @@ function getTaskData(taskColumn, storageKey) {
       taskColumn
         .querySelector(".list_tasks")
         .insertAdjacentHTML("beforeend", taskName);
-      addEventListenersToTask(taskColumn, storageKey);
     });
+
+    addEventListenersToTask(taskColumn, storageKey);
   }
 }
 
