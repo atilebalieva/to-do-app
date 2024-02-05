@@ -214,7 +214,9 @@ header,
 }
 
 .task_column h4 {
-   font-size: 0.9rem
+   font-size: 0.9rem;
+   text-transform: uppercase;
+   font-weight: bold;
 }
 
 .textarea {
@@ -283,11 +285,6 @@ header,
    background-color: transparent;
    font-size: 0.8rem;
    cursor:pointer;
-}
-
-.task {
-   overflow-y: hidden; 
-   height: auto;
 }
 
 .task,
