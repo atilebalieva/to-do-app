@@ -24,6 +24,22 @@ html {
    --hoverBack: rgba(255, 255, 255, 0.3);
 }
 
+.flex{
+   display: flex;
+}
+
+.justify-between {
+   justify-content: space-between;
+}
+
+.align-items-center{
+   align-items: center;
+}
+
+.gap {
+   gap: 30px
+}
+
 body {
    height: 100vh;
    font-family: 'Roboto', sans-serif
@@ -36,12 +52,18 @@ header {
    border-bottom: 0.5px solid var(--grey);
    height: 8%;
    min-height: 50px;
+   padding: 25px 17px;
 }
 
 header,
 .sidebar {
    background:var(--dark);
    color: var(--white);
+}
+
+.nav_link {
+   color: vaR(--white);
+   text-decoration: none;
 }
 
 .navbar-logo {
@@ -125,6 +147,7 @@ header,
    display: flex;
    justify-content: space-between;
    align-items: center;
+   padding: 12px 17px;
 }
 
 .sidebar_nav span:first-child{
@@ -164,6 +187,10 @@ header,
    height: 30px;
 }
 
+.sidebar_boards .flex {
+   padding: 12px 17px;
+}
+
 .sidebar_arrow:hover,
 .sidebar_boards span:hover {
    background-color: var(--hoverBack);
@@ -193,6 +220,10 @@ header,
 
 .sidebar_boards p:hover {
    background-color: #aaa2a24d;
+}
+
+.sidebar_boards:last-child p {
+   padding: 8px 17px;
 }
 
 #board_content {
