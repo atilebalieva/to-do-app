@@ -127,7 +127,7 @@ function getTaskCardHtml() {
   return `
     <form class="add-task_card" action="#">
       <textarea name="text" class="textarea task-value"cols="28" rows="10" placeholder="New task..." style="height: 56px;" ></textarea>
-      <button type="submit" class="btn btn-primary add-task_card-btn">Add card</button>
+      <button type="submit" class="add-task_card-btn">Add card</button>
       <span class="remove-task_card">Cancel</span>
     </form>`;
 }

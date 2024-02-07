@@ -261,19 +261,27 @@ header,
    padding: 6px;
    margin: 7px 0;
    box-shadow: 0px 0px 4px rgb(207, 206, 206);
+   font-size: 0.9rem;
+   height: fit-content;
+}
+
+.textarea::placeholder {
+   font-size: 0.8rem;
 }
 
 .task_column-add-btn {
    background-color: transparent;
    outline: none;
    border: none;
-   padding: 5px;
+   padding:8px 5px;
    border-radius: 5px;
    width: 80%;
    text-align: left;
+   cursor: pointer;
 }
 
-.task_column-add-btn:hover{
+.task_column-add-btn:hover,
+.task_column span:hover {
    background-color: #aaa2a24d;
 }
 
@@ -291,15 +299,19 @@ header,
 }
 
 .add-task_card-btn {
-   padding: 5px 10px !important;
+   padding: 7px 13px;
    font-size: 0.9rem !important;
-   font-weight: bold;
+   background-color: #2f54e7;
+   color: var(--white);
+   border: none;
+   border-radius: 4px;
+   cursor: pointer;
 }
 
 .task_column span {
    padding: 6px 12px 9px;
    border-radius: 5px;
-   font-size: 1rem;
+   font-size: 0.9rem;
    cursor: pointer;
 }
 
