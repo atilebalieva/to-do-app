@@ -13,10 +13,12 @@ function sidebarToggle(display, width) {
 document.getElementById("sidebar_close").addEventListener("click", () => {
   sidebarToggle("block", "100%");
   document.querySelector(".sidebar").classList.add("sidebar_none");
+  document.querySelector(".sidebar").classList.remove("sidebar");
 });
 
 document.getElementById("sidebar_open").addEventListener("click", () => {
   sidebarToggle("none", "75%");
+  document.querySelector(".sidebar_none").classList.add("sidebar");
   document.querySelector(".sidebar").classList.remove("sidebar_none");
 });
 /* Sidebar toggle */
@@ -33,6 +35,7 @@ function removeEmptyTasks(taskColumn, storageKey) {
   const draggableTasks = taskColumn.querySelectorAll(
     ".list_tasks .draggable-task"
   );
+
   draggableTasks.forEach((draggableTask) => {
     const textarea = draggableTask.querySelector(".textarea.task");
     if (textarea && textarea.value.trim() === "") {
@@ -44,6 +47,7 @@ function removeEmptyTasks(taskColumn, storageKey) {
 
 function addEventListenersToTask(taskColumn, storageKey) {
   const changeTask = taskColumn.querySelectorAll(".list_tasks .task");
+
   changeTask.forEach((item) => {
     item.addEventListener("input", (e) => {
       item.innerText = e.target.value;
@@ -65,6 +69,7 @@ function addEventListenersToTask(taskColumn, storageKey) {
 
 function getTaskData(taskColumn, storageKey) {
   const data = JSON.parse(localStorage.getItem(storageKey));
+
   if (data) {
     data.forEach((item) => {
       const taskName = `

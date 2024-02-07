@@ -114,8 +114,9 @@ header,
 }
 
 .sidebar_none {
+   width:0%;
    left: -2000px;
-   position: absolute;
+   position: relative;
    transition: all 0.5s ease-in;
 }
 
@@ -146,8 +147,10 @@ header,
 .sidebar_close-form {
    border-right: 0.3px solid var(--white);
    min-width: 15px;
+   height: 92%;
    background-color: var(--dark);
-   position: relative;
+   position: absolute;
+   left: 0%;
 }
 
 .fa-arrow-right {
@@ -198,6 +201,7 @@ header,
    gap: 30px;
    padding: 10px 20px 10px 50px;
    overflow-x: auto;
+   flex-grow: 1;
 }
 
 .task_column {
