@@ -8,8 +8,8 @@
 }
 
 ul, ol {
-   margin: 0 !important;
-   padding: 0 !important; 
+   margin: 0;
+   padding: 0; 
 }
 
 html {
@@ -20,8 +20,8 @@ html {
    --grey: #4f4f4f;
    --white: white;
    --dark: #221e24;
-   --pinkBack: rgba(172,75,121,255);
-   --hoverBack: rgba(255, 255, 255, 0.3);
+   --pinkBack: #903f65;
+   --hoverBack:#aaa2a24d;
 }
 
 .flex{
@@ -37,12 +37,12 @@ html {
 }
 
 .gap {
-   gap: 30px
+   gap: 20px
 }
 
 body {
    height: 100vh;
-   font-family: 'Roboto', sans-serif
+   font-family: 'Roboto', sans-serif;
 }
 
 header {
@@ -156,7 +156,6 @@ header,
    border-radius: 5px;
    font-size: 1.3rem;
    margin-right: 15px;
-   cursor: pointer;
 }
 
 .sidebar_arrow {
@@ -207,7 +206,7 @@ header,
 
 .sidebar_boards span {
    display: block;
-   padding: 0px 10px;
+   padding: 4px 10px;
    font-weight: bold;
    cursor: pointer;
    font-size: 1.3rem;
@@ -278,10 +277,11 @@ header,
    width: 80%;
    text-align: left;
    cursor: pointer;
+   margin-top: 10px;
 }
 
 .task_column-add-btn:hover,
-.task_column span:hover {
+.remove-task_card:hover {
    background-color: #aaa2a24d;
 }
 
@@ -292,6 +292,7 @@ header,
 
 .list_tasks {
    min-height: 20px;
+   margin-bottom: 10px;
 }
 
 .list_tasks .height {
@@ -300,7 +301,7 @@ header,
 
 .add-task_card-btn {
    padding: 7px 13px;
-   font-size: 0.9rem !important;
+   font-size: 0.9rem;
    background-color: #2f54e7;
    color: var(--white);
    border: none;
@@ -321,6 +322,14 @@ header,
 
 .draggable-task {
    position: relative;
+   min-height: 20%;
+   height: 80px;
+   max-height: fit-content;
+   margin-bottom: 10px;
+/*    border: 1px solid red; */
+}
+
+.task {
    height: 100%;
 }
 
