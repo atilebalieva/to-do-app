@@ -57,10 +57,12 @@ function removeEmptyTasks(taskColumn, storageKey) {
   );
   draggableTasks.forEach((draggableTask) => {
     const textarea = draggableTask.querySelector(".textarea.task");
-    if (textarea && textarea.value.trim() === "") {
-      draggableTask.remove();
-      saveTaskData(taskColumn, storageKey);
-    }
+    textarea.addEventListener("focusout", (e) => {
+      if (textarea.value.trim() === "") {
+        draggableTask.remove();
+        saveTaskData(taskColumn, storageKey);
+      }
+    });
   });
 }
 
@@ -135,7 +137,7 @@ function getTaskCardHtml() {
   return `
     <form class="add-task_card" action="#">
       <textarea name="text" class="textarea task-value"cols="28" rows="10" placeholder="New task..." style="height: 70px;" ></textarea>
-      <button type="submit" class="add-task_card-btn">Add card</button>
+      <button type="submit" class="add-task_card-btn">Add task</button>
       <span class="remove-task_card">Cancel</span>
     </form>`;
 }
